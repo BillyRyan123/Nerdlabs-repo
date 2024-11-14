@@ -34,6 +34,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
@@ -66,6 +70,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyLogin(){// Start of Function
+
+    var userName  by remember{ mutableStateOf("") }
+    var passWord by remember{ mutableStateOf("****") }
+
+
+
+
+
     Column (
         modifier = Modifier.fillMaxSize()
             .background(Color.White),
@@ -81,7 +93,7 @@ fun MyLogin(){// Start of Function
             Button(onClick = { /*TODO*/ },
                 modifier=Modifier
                     .border(
-                        border = BorderStroke(1.dp, Color.Gray), // Outline border color and thickness
+                        border = BorderStroke(1.dp, Color.Gray),
                         shape = MaterialTheme.shapes.medium
                     ),
                 elevation = null,
@@ -121,8 +133,8 @@ fun MyLogin(){// Start of Function
              Spacer(modifier = Modifier.height(64.dp))
 
             Spacer(modifier = Modifier.height(16.dp))
-             NewComp("E-Mail")
-             NewComp("Password")
+             NewComp("E-Mail" , "Enter email")
+             NewComp("Password" , "Enter Password")
 
              Spacer(modifier = Modifier.height(16.dp))
 
@@ -148,7 +160,8 @@ fun MyLogin(){// Start of Function
             Spacer(modifier = Modifier.height(16.dp))
             Row {// Start of row
                     Text(text="Remember me")
-                Spacer(modifier = Modifier.height(16 .dp))
+                Spacer(modifier = Modifier.width(16 .dp))
+
                     Text(text="Forgot Password?")
 
             }// end of row
@@ -229,13 +242,11 @@ fun MyLogin(){// Start of Function
 }//End of function
 
 @Composable
-fun NewComp(title:String){
+fun NewComp(title:String, label:String){
     Column {
-        Text(text = title,
-
-            )
+        Text(text = title)
         OutlinedTextField(value = "", onValueChange = {},
-            label = { Text("Enter email") },
+            label = { Text(text = label) },
             modifier=Modifier
                 .width(300.dp)
                 .height(60.dp)
